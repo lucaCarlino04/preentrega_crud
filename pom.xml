@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>javabackend</groupId>
+  <artifactId>preentrega_crud</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>preentrega_crud</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+
+            <!-- Plugin de Maven Surefire para ejecutar pruebas -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <!-- Asegura la compatibilidad con JUnit 5 -->
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
+                </configuration>
+            </plugin>
+
+
+            <!-- Plugin de JaCoCo -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version> <!-- Usa la última versión disponible -->
+                <configuration>
+                    <excludes>
+                        <!-- Excluye cualquier clase que empiece con Main -->
+                        <exclude>*/Main.class</exclude>
+                        <!-- O si querés todas las clases dentro de un paquete "app" -->
+                        <exclude>*/app/*</exclude>
+                    </excludes>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal> <!-- Habilita el agente de JaCoCo -->
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase> <!-- Genera el informe después de las pruebas -->
+                        <goals>
+                            <goal>report</goal> <!-- Genera el informe de cobertura -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
