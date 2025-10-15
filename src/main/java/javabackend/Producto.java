@@ -8,12 +8,12 @@ public class Producto {
     private Integer stock;
     private Categoria categoria = null;
 
-    // Si tiene categoria
     public Producto(String nombre, Double precio, Integer stock, Categoria categoria) {
         if (precio < 0 || stock < 0) {
             throw new IllegalArgumentException("El precio o stock no pueden ser negativos.");
+        } else if (nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar en blanco.");
         }
-
         this.categoria = categoria;
         this.id = contador++;
         this.nombre = nombre;
@@ -76,10 +76,6 @@ public class Producto {
 
     @Override
     public String toString() {
-        if (categoria == null) {
-            return "Producto(Nombre: " + getNombre() + " | Precio: " + getPrecio();
-        } else {
-            return "ID: "+ id + " | Nombre: " + getNombre() + " | Precio: " + getPrecio() + " | Categoría: " + getCategoria().getNombre();
-        }
+        return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: " + getCategoria().getNombre();
     }    
 }

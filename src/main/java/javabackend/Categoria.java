@@ -6,6 +6,9 @@ class Categoria {
     private String nombre;
 
     public Categoria(String nombre) {
+        if (nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar en blanco.");
+        }
         this.id = contador++;
         this.nombre = nombre;
     }
