@@ -17,6 +17,21 @@ public abstract class CrudConsola {
         System.out.println("4) Eliminar");
         System.out.println("0) Salir");
     }
+    
+    protected Integer leerEntero(String mensaje) {
+        System.out.println(mensaje);
+        return scanner.nextInt();
+    }
+
+    protected Double leerDouble(String mensaje) {
+        System.out.println(mensaje);
+        return scanner.nextDouble();
+    }
+
+    protected String leerTexto(String mensaje) {
+        System.out.println(mensaje);
+        return scanner.nextLine();
+    }
 
 
     // Idea: Hacer este método abstracto para poner diferentes opciones en cada CRUD, 

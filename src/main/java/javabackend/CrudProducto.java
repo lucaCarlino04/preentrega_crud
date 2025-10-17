@@ -14,35 +14,32 @@ public class CrudProducto extends CrudConsola {
     public void mostrarMenu() {
         System.out.println("1) Crear producto");
         System.out.println("2) Listar productos");
-        // System.out.println("3) Listar producto por ID"); MAS TARDE LO IMPLEMENTO
+        // System.out.println("#) Listar producto por ID"); MAS TARDE LO IMPLEMENTO
         System.out.println("3) Modificar producto");
         System.out.println("4) Eliminar producto");
         System.out.println("0) Atrás");
         System.out.println("Opción: ");
     }
+
     @Override
     public void crear() {
+        // Mensaje por si no tengo categorias creadas todavía
         if (App.getCategorias().isEmpty()) {
             System.out.println("No hay categorías. Primero, cree una.");
             CrudCategoria.getInstance().crear();
             return;
         }
         try {
-            System.out.println("Nombre del producto: ");
-            String nombre = scanner.nextLine();
-
-            System.out.println("Precio: ");
-            Double precio = scanner.nextDouble();
-
-            System.out.println("Stock disponible: ");
-            Integer stock = scanner.nextInt();
+            String nombre = leerTexto("Nombre del producto: ");
+            Double precio = leerDouble("Precio: ");
+            Integer stock = leerEntero("Stock disponible: ");
 
             CrudCategoria.getInstance().listar();
             Categoria nueva = CrudCategoria.getInstance().buscarCategoria();
 
             Producto productoNuevo = new Producto(nombre, precio, stock, nueva);
             App.getProductos().add(productoNuevo);
-            System.out.println("Se creó con éxito el producto: " + productoNuevo);
+            System.out.println("Producto creado: " + productoNuevo);
         } catch (CategoriaNoEncontradaException e) {
             System.out.println("Error: " + e);
         }
@@ -107,8 +104,7 @@ public class CrudProducto extends CrudConsola {
     }
 
     private Producto buscarProductoId() throws ProductoNoEncontradoException {
-        System.out.println("ID del producto: ");
-        Integer idBuscado = scanner.nextInt();
+        Integer idBuscado = leerEntero("ID del producto: ");
         scanner.nextLine();
 
         Producto resultado = App.getProductos().stream().filter(p -> p.getId() == idBuscado).findFirst().orElse(null);
@@ -129,25 +125,19 @@ public class CrudProducto extends CrudConsola {
     }
 
     private void cambiarNombre(Producto p) {
-        System.out.println("Nuevo nombre: ");
-        String nuevoNombre = scanner.nextLine();
-
+        String nuevoNombre = leerTexto("Nuevo nombre: ");
         p.setNombre(nuevoNombre);
         System.out.println("Nombre cambiado a " + nuevoNombre);
     }
 
     private void cambiarPrecio(Producto p) {
-        System.out.println("Nuevo precio: ");
-        Double nuevoPrecio = scanner.nextDouble();
-
+        Double nuevoPrecio = leerDouble("Nuevo precio: ");
         p.setPrecio(nuevoPrecio);
         System.out.println("Precio cambiado a " + nuevoPrecio);
     }
 
     private void cambiarStock(Producto p) {
-        System.out.println("Nuevo stock: ");
-        Integer nuevoStock = scanner.nextInt();
-
+        Integer nuevoStock = leerEntero("Nuevo stock: ");
         p.setStock(nuevoStock);
         System.out.println("Stock cambiado a " + nuevoStock);
     }

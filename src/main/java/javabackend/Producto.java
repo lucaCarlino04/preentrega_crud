@@ -6,8 +6,9 @@ public class Producto {
     private String nombre;
     private Double precio;
     private Integer stock;
-    private Categoria categoria = null;
+    private Categoria categoria; // Es opcional, aunque en el CRUD siempre pide una
 
+    // Si tiene categoría
     public Producto(String nombre, Double precio, Integer stock, Categoria categoria) {
         if (precio < 0 || stock < 0) {
             throw new IllegalArgumentException("El precio o stock no pueden ser negativos.");
@@ -15,6 +16,19 @@ public class Producto {
             throw new IllegalArgumentException("El nombre no puede estar en blanco.");
         }
         this.categoria = categoria;
+        this.id = contador++;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
+    // Si no tiene categoría
+    public Producto(String nombre, Double precio, Integer stock) {
+        if (precio < 0 || stock < 0) {
+            throw new IllegalArgumentException("El precio o stock no pueden ser negativos.");
+        } else if (nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar en blanco.");
+        }
         this.id = contador++;
         this.nombre = nombre;
         this.precio = precio;
@@ -53,7 +67,7 @@ public class Producto {
             return categoria;
         }
         else {
-            System.out.println("Este producto no tiene una categoría vínculada.");
+            System.out.println("(sin categoría)");
             return null;
         }
     }
@@ -76,6 +90,10 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: " + getCategoria().getNombre();
+        if (categoria != null) {
+            return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: " + getCategoria().getNombre();
+        } else {
+            return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: (sin categoría)";
+        }
     }    
 }

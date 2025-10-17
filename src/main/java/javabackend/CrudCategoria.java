@@ -23,9 +23,7 @@ public class CrudCategoria extends CrudConsola {
     public void crear() {
         
         try {
-            System.out.println("Nombre de la categoría: ");
-            String nombre = scanner.nextLine();
-
+            String nombre = leerTexto("Nombre de la categoría: ");
             Categoria nuevaCategoria = new Categoria(nombre);
             App.getCategorias().add(nuevaCategoria);
             System.out.println("Categoría creada: " + nuevaCategoria);
@@ -51,8 +49,7 @@ public class CrudCategoria extends CrudConsola {
         listar();
         try {
             Categoria catBuscada = buscarCategoria();
-            System.out.println("Nuevo nombre: ");
-            String nombreNuevo = scanner.nextLine();
+            String nombreNuevo = leerTexto("Nuevo nombre: ");
             catBuscada.setNombre(nombreNuevo);
             System.out.println("Nombre cambiado correctamente a " + nombreNuevo);
         } catch (CategoriaNoEncontradaException e) {
@@ -68,15 +65,14 @@ public class CrudCategoria extends CrudConsola {
         try {
             Categoria catBuscada = buscarCategoria();
             App.getCategorias().remove(catBuscada);
-            System.out.println("Categoría " + catBuscada + " eliminada con éxito.");
+            System.out.println("Categoría " + catBuscada.getNombre() + " eliminada con éxito.");
         } catch (CategoriaNoEncontradaException e) {
             System.out.println("Error: " + e);
         }
     }
 
     public Categoria buscarCategoria() throws CategoriaNoEncontradaException {
-        System.out.println("ID de la categoría: ");
-        Integer idCat = scanner.nextInt();
+        Integer idCat = leerEntero("ID de la categoría: ");
         scanner.nextLine();
 
         Categoria categoria = App.getCategorias().stream().filter(cat -> cat.getId() == idCat).findFirst().orElse(null);
