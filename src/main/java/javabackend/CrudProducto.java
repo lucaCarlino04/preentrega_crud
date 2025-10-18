@@ -59,9 +59,11 @@ public class CrudProducto extends CrudConsola {
     public void modificar() {
         Integer opcion = -1;
         try {
+            listar();
             Producto aModificar = buscarProductoId();
             
             do {
+                System.out.println(aModificar);
                 menuModificar();
                 opcion = scanner.nextInt();
                 scanner.nextLine();
@@ -94,6 +96,7 @@ public class CrudProducto extends CrudConsola {
     @Override
     public void eliminar() {
         try {
+            listar();
             Producto aEliminar = buscarProductoId();
             App.getProductos().remove(aEliminar);
             System.out.println("Producto eliminado: " + aEliminar);
@@ -125,29 +128,33 @@ public class CrudProducto extends CrudConsola {
     }
 
     private void cambiarNombre(Producto p) {
+        String viejoNombre = p.getNombre();
         String nuevoNombre = leerTexto("Nuevo nombre: ");
         p.setNombre(nuevoNombre);
-        System.out.println("Nombre cambiado a " + nuevoNombre);
+        System.out.println("Nombre cambiado: " + viejoNombre + " -> " + nuevoNombre);
     }
 
     private void cambiarPrecio(Producto p) {
+        Double viejoPrecio = p.getPrecio();
         Double nuevoPrecio = leerDouble("Nuevo precio: ");
         p.setPrecio(nuevoPrecio);
-        System.out.println("Precio cambiado a " + nuevoPrecio);
+        System.out.println("Precio cambiado: " + viejoPrecio + " -> " + nuevoPrecio);
     }
 
     private void cambiarStock(Producto p) {
+        Integer viejoStock = p.getStock();
         Integer nuevoStock = leerEntero("Nuevo stock: ");
         p.setStock(nuevoStock);
-        System.out.println("Stock cambiado a " + nuevoStock);
+        System.out.println("Stock cambiado:" + viejoStock + " -> " + nuevoStock);
     }
 
     private void cambiarCategoria(Producto p) {
         CrudCategoria.getInstance().listar();
         try {
+            Categoria catVieja = p.getCategoria();
             Categoria catNueva = CrudCategoria.getInstance().buscarCategoria();
             p.setCategoria(catNueva);
-            System.out.println("Categoria cambiada a " + catNueva.getNombre());
+            System.out.println("Categoria cambiada: " + catVieja.getNombre() + " -> " + catNueva.getNombre());
         } catch (CategoriaNoEncontradaException e) {
             System.out.println("Error: " + e);
         }

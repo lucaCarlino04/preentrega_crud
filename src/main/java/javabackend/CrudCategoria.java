@@ -21,7 +21,6 @@ public class CrudCategoria extends CrudConsola {
 
     @Override
     public void crear() {
-        
         try {
             String nombre = leerTexto("Nombre de la categoría: ");
             Categoria nuevaCategoria = new Categoria(nombre);
@@ -49,9 +48,10 @@ public class CrudCategoria extends CrudConsola {
         listar();
         try {
             Categoria catBuscada = buscarCategoria();
+            String nombreViejo = catBuscada.getNombre();
             String nombreNuevo = leerTexto("Nuevo nombre: ");
             catBuscada.setNombre(nombreNuevo);
-            System.out.println("Nombre cambiado correctamente a " + nombreNuevo);
+            System.out.println("Nombre cambiado: " + nombreViejo + " -> " + nombreNuevo);
         } catch (CategoriaNoEncontradaException e) {
             System.out.println("Error: " + e);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class CrudCategoria extends CrudConsola {
         try {
             Categoria catBuscada = buscarCategoria();
             App.getCategorias().remove(catBuscada);
-            System.out.println("Categoría " + catBuscada.getNombre() + " eliminada con éxito.");
+            System.out.println("Categoría eliminada: " + catBuscada.getNombre());
         } catch (CategoriaNoEncontradaException e) {
             System.out.println("Error: " + e);
         }
