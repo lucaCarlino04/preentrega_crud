@@ -1,4 +1,4 @@
-package javabackend;
+package javabackend.Cruds;
 
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
-package javabackend;
+package javabackend.Productos;
 
-public class Producto {
+public class Producto implements Vendible {
     private static Integer contador = 1;
     private final Integer id;
     private String nombre;
@@ -95,5 +95,17 @@ public class Producto {
         } else {
             return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: (sin categoría)";
         }
+    }
+
+    @Override
+    public Boolean estaDisponible() {
+        return stock > 0;
+    }
+
+    @Override
+    public void aplicarDescuento(Double porcentaje) {
+        this.precio *= (1 - porcentaje / 100);
     }    
 }
+
+// precio *= (1 - porcentaje / 100);

@@ -1,7 +1,10 @@
-package javabackend;
+package javabackend.Cruds;
 
+import javabackend.App;
 import javabackend.Excepciones.CategoriaNoEncontradaException;
 import javabackend.Excepciones.ProductoNoEncontradoException;
+import javabackend.Productos.Categoria;
+import javabackend.Productos.Producto;
 
 public class CrudProducto extends CrudConsola {
     private static final CrudProducto instance = new CrudProducto();
@@ -42,6 +45,7 @@ public class CrudProducto extends CrudConsola {
             System.out.println("Producto creado: " + productoNuevo);
         } catch (CategoriaNoEncontradaException e) {
             System.out.println("Error: " + e);
+            return;
         }
     }
 

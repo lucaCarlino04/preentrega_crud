@@ -1,6 +1,6 @@
-package javabackend;
+package javabackend.Productos;
 
-class Categoria {
+public class Categoria {
     private static Integer contador = 1;
     private final Integer id;
     private String nombre;

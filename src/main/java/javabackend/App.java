@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javabackend.Cruds.CrudCategoria;
+import javabackend.Cruds.CrudProducto;
+import javabackend.Productos.Categoria;
+import javabackend.Productos.Producto;
+
 public class App {
     private static ArrayList<Producto> productos = new ArrayList<>();
     private static ArrayList<Categoria> categorias = new ArrayList<>();

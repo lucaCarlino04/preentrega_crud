@@ -1,6 +1,8 @@
-package javabackend;
+package javabackend.Cruds;
 
+import javabackend.App;
 import javabackend.Excepciones.CategoriaNoEncontradaException;
+import javabackend.Productos.Categoria;
 
 public class CrudCategoria extends CrudConsola {
     private static final CrudCategoria instance = new CrudCategoria();
