@@ -1,0 +1,10 @@
+javabackend\Productos\Producto.class
+javabackend\Cruds\CrudConsola.class
+javabackend\App.class
+javabackend\Cruds\CrudProducto.class
+javabackend\Excepciones\CategoriaNoEncontradaException.class
+javabackend\Excepciones\NoExistenCategoriasException.class
+javabackend\Excepciones\ProductoNoEncontradoException.class
+javabackend\Productos\Categoria.class
+javabackend\Cruds\CrudCategoria.class
+javabackend\Productos\Vendible.class
