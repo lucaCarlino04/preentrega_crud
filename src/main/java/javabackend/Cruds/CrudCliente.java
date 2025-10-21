@@ -4,6 +4,7 @@ import javabackend.App;
 import javabackend.Clientes.Cliente;
 import javabackend.Excepciones.ClienteNoEncontradoException;
 import javabackend.Excepciones.ProductoNoEncontradoException;
+import javabackend.Excepciones.StockInsuficienteException;
 import javabackend.Productos.Producto;
 
 public class CrudCliente extends CrudConsola {
@@ -20,18 +21,21 @@ public class CrudCliente extends CrudConsola {
             mostrarMenu();
             opcionCrud = scanner.nextInt();
             scanner.nextLine();
-
-            switch (opcionCrud) {
-                case 1: crear(); break;
-                case 2: listar(); break;
-                case 3: modificar(); break;
-                case 4: hacerPedido(); break;
-                case 5: verPedido(); break;
-                case 6: eliminar(); break;
-                case 0: break;
-                default: 
-                    System.out.println("Opción no válida."); 
-                    break;
+            try {
+                switch (opcionCrud) {
+                    case 1: crear(); break;
+                    case 2: listar(); break;
+                    case 3: modificar(); break;
+                    case 4: hacerPedido(); break;
+                    case 5: verPedido(); break;
+                    case 6: eliminar(); break;
+                    case 0: break;
+                    default: 
+                        System.out.println("Opción no válida."); 
+                        break;
+                    }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
         } while (opcionCrud != 0);
     }
@@ -106,7 +110,7 @@ public class CrudCliente extends CrudConsola {
         }
     }
 
-    public void hacerPedido() {
+    public void hacerPedido() throws StockInsuficienteException {
         if (App.getProductos().isEmpty()) {
             System.out.println("(sin productos)");
             return;
@@ -127,7 +131,11 @@ public class CrudCliente extends CrudConsola {
                 if (opcion == 0) {
                     break;
                 }
+                if (!producto.estaDisponible()) {
+                    throw new StockInsuficienteException("Stock insufuciente.");
+                }
                 cliente.getPedido().agregarProducto(producto);
+                producto.setStock(producto.getStock() - 1);
                 System.out.println("Producto " + producto.getNombre() + " añadido a cliente " + cliente.getNombre() + "(ID " + cliente.getId() + ")");
             } while (true);
 

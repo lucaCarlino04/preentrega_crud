@@ -91,7 +91,7 @@ public class Producto implements Vendible {
     @Override
     public String toString() {
         if (categoria != null) {
-            return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: " + getCategoria().getNombre();
+            return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Stock disponible: " + stock + " | Categoría: " + getCategoria().getNombre();
         } else {
             return "ID: " + id + " | Nombre: " + nombre + " | Precio: " + precio + " | Categoría: (sin categoría)";
         }
